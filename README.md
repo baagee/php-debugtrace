@@ -1,0 +1,2 @@
+# php-debugtrace
+php-debugtrace
