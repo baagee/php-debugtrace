@@ -4,7 +4,8 @@
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "PHP","debug trace"
+        "PHP",
+        "debug trace"
     ],
     "authors": [
         {
@@ -21,7 +22,10 @@
     "autoload": {
         "psr-4": {
             "BaAGee\\DebugTrace\\": "src/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "repositories": {
         "packagist": {

@@ -54,7 +54,8 @@ class TraceCollector
      */
     public static function dump(...$variables)
     {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+        $trace = end($trace);
         $pos = $trace['file'] . ':' . $trace['line'];
         foreach ($variables as $variable) {
             $variable = is_scalar($variable) ? $variable : (is_resource($variable) ? 'resource' : var_export($variable, true));
