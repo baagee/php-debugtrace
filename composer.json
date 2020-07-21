@@ -1,0 +1,32 @@
+{
+    "name": "baagee/php-debug-trace",
+    "description": "PHP Debug Trace",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "PHP","debug trace"
+    ],
+    "authors": [
+        {
+            "name": "BaAGee",
+            "email": "2274313786@qq.com"
+        }
+    ],
+    "bin": [
+        "bin/creater"
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "BaAGee\\DebugTrace\\": "src/"
+        }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
+    }
+}
