@@ -20,7 +20,7 @@
     </style>
     <div id="_debug_trace_page_trace_tab" style="display: none;background:white;margin:0;height: 285px;">
         <div id="_debug_trace_page_trace_tab_tit"
-             style="height:30px;padding: 0;background-color:#ddecf9;font-size:16px;border-top:1px solid #ececec;">
+             style="height:30px;padding: 0;background-color:#ddecf9;font-size:16px;border-top:1px solid #ececec;cursor: row-resize">
             <?php foreach ($trace as $key => $value) { ?>
                 <span class="tab_56GY67tghyt"
                       style="color:#000;padding:0 10px;height:29px;line-height:29px;display:inline-block;cursor:pointer;font-weight:700"><?php echo $key ?></span>
