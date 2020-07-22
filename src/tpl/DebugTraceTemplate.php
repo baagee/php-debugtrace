@@ -8,7 +8,7 @@
             height: 35px;
         }
     </style>
-    <div id="_debug_trace_page_trace_tab" style="display: none;background:white;margin:0;height: 255px;">
+    <div id="_debug_trace_page_trace_tab" style="display: none;background:white;margin:0;height: 285px;">
         <div id="_debug_trace_page_trace_tab_tit"
              style="height:30px;padding: 0;background-color:#ddecf9;font-size:16px;border-top:1px solid #ececec;">
             <?php foreach ($trace as $key => $value) { ?>
@@ -17,7 +17,7 @@
             <?php } ?>
         </div>
         <div id="_debug_trace_page_trace_tab_cont"
-             style="overflow:auto;height:220px;padding:0;line-height: 24px;">
+             style="overflow:auto;height:250px;padding:0;line-height: 24px;">
             <?php foreach ($trace as $info) { ?>
                 <div style="display:none;">
                     <ol style="padding: 0; margin:0">
