@@ -9,6 +9,7 @@ include __DIR__ . '/../vendor/autoload.php';
 
 // \BaAGee\DebugTrace\DebugTrace::init(\BaAGee\DebugTrace\OutputConsole::class);
 \BaAGee\DebugTrace\DebugTrace::init(\BaAGee\DebugTrace\OutputHtml::class);
+\BaAGee\DebugTrace\TraceCollector::setEnv(['name' => 'fdasa', 'age' => 2342]);
 
 $html = <<<HTML
 <html>
@@ -20,6 +21,7 @@ aaa
 </body>
 HTML;
 
+
 \BaAGee\DebugTrace\TraceCollector::dump(true, false, 'aaa', 241, 33.44,
     new ReflectionClass(\BaAGee\DebugTrace\TraceCollector::class),
     function () {
@@ -27,21 +29,32 @@ HTML;
 $a = ['name' => 'name', 'age' => 90];
 dump($a, 23542);
 
-function test()
+function test($a)
 {
-    \BaAGee\DebugTrace\TraceCollector::addLog('SQL', 'select * from `students`');
     addTrace('卧槽怎么啦');
     addTrace(str_repeat('嘿嘿嘿', 50));
+    \BaAGee\DebugTrace\TraceCollector::addLog('SQL', 'select * from `students`');
     \BaAGee\DebugTrace\TraceCollector::addLog('SQL', 'select * from `scheduling`');
+    \BaAGee\DebugTrace\TraceCollector::dump(235,$a);
 }
 
-test();
-
+$a = [
+    'people' => [
+        'name' => "dsfsa",
+        'age' => 90,
+        'home' => [
+            'province' => 'asd'
+        ]
+    ]
+];
+test($a);
 addTrace('哈哈哈');
+\BaAGee\DebugTrace\TraceCollector::addLog('what?', $a);
 \BaAGee\DebugTrace\TraceCollector::addLog('what?', 'select * from `scheduling`');
-\BaAGee\DebugTrace\TraceCollector::setEnv([
-    'name'=>'fdasa','age'=>2342
-]);
+
+dump($a);
+
+
 $output = \BaAGee\DebugTrace\DebugTrace::output();
 
 echo $output . $html . '</html>';
