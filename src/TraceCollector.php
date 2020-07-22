@@ -17,7 +17,10 @@ class TraceCollector
      * @var array
      */
     protected static $logs = [];
-    protected static $env  = [];
+    /**
+     * @var array
+     */
+    protected static $env = [];
     /**
      * @var int 毫秒
      */
@@ -170,7 +173,7 @@ class TraceCollector
      */
     public static function getCostTime()
     {
-        return number_format(self::getEndTime() - self::$beginTime, 2, '.', '');
+        return number_format(self::getEndTime() - self::getBeginTime(), 2, '.', '');
     }
 
     /**
@@ -178,7 +181,7 @@ class TraceCollector
      */
     public static function getMemoryUsage()
     {
-        return number_format((self::getEndMemory() - self::$beginMemory) / 1024, 2, '.', '');
+        return number_format((self::getEndMemory() - self::getBeginMemory()) / 1024, 2, '.', '');
     }
 
     /**
@@ -189,28 +192,26 @@ class TraceCollector
         return $_SERVER;
     }
 
-    public static function getUploadFilesInfo()
-    {
-        $_FILES = [
-            "dsgs" => [
-                "asdf" => 'asdfa',
-                "fgsd" => 'sdg'
-            ]
-        ];
-        return $_FILES;
-    }
-
+    /**
+     * 添加环境变量
+     * @param $envArr
+     */
     public static function setEnv($envArr)
     {
         self::$env = array_merge(self::$env, $envArr);
     }
 
+    /**
+     * 获取环境变量
+     * @return array
+     */
     public static function getEnvInfo()
     {
         return array_merge($_ENV, self::$env);
     }
 
     /**
+     * 获取请求信息
      * @return array
      */
     public static function getRequestInfo()

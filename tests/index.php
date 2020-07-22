@@ -7,8 +7,8 @@
  */
 include __DIR__ . '/../vendor/autoload.php';
 
-\BaAGee\DebugTrace\DebugTrace::init('console');
-// \BaAGee\DebugTrace\DebugTrace::init('html');
+// \BaAGee\DebugTrace\DebugTrace::init(\BaAGee\DebugTrace\OutputConsole::class);
+\BaAGee\DebugTrace\DebugTrace::init(\BaAGee\DebugTrace\OutputHtml::class);
 
 $html = <<<HTML
 <html>

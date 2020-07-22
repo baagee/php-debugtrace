@@ -14,27 +14,18 @@ namespace BaAGee\DebugTrace;
 final class DebugTrace
 {
     /**
-     *
-     */
-    const TYPE_CONSOLE = 'console';
-    /**
-     *
-     */
-    const TYPE_HTML = 'html';
-
-    /**
      * @var string
      */
-    protected static $showType = 'html';
+    protected static $outputClass = OutputHtml::class;
 
     /**
      * 初始化设置输出类型
-     * @param string $type html or console
+     * @param string $outputClass
      */
-    public static function init($type)
+    public static function init($outputClass = OutputHtml::class)
     {
-        if (in_array($type, [self::TYPE_CONSOLE, self::TYPE_HTML])) {
-            self::$showType = $type;
+        if (class_exists($outputClass) && in_array(\BaAGee\DebugTrace\OutputInterface::class, class_implements($outputClass))) {
+            self::$outputClass = $outputClass;
         }
         TraceCollector::setBeginTime(intval(microtime(true) * 1000));
         TraceCollector::setBeginMemory(memory_get_usage());
@@ -76,13 +67,6 @@ final class DebugTrace
         $data['$_SERVER'] = $serverInfo;
         $files = TraceCollector::getIncludedFiles();
         $data['加载文件'] = $files;
-        if (self::$showType == self::TYPE_CONSOLE) {
-            return (new OutputConsole())->output($data);
-        }
-        if (self::$showType == self::TYPE_HTML) {
-            $data['runtime'] = $runtime;
-            return (new OutputHtml())->output($data);
-        }
-        return '';
+        return (new self::$outputClass())->output($data);
     }
 }

@@ -19,8 +19,6 @@ class OutputHtml implements OutputInterface
      */
     public function output($trace)
     {
-        $runtime = $trace['runtime'];
-        unset($trace['runtime']);
         ob_start();
         include __DIR__ . '/tpl/DebugTraceTemplate.php';
         return ob_get_clean();
