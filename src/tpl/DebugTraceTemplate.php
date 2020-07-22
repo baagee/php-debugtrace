@@ -4,6 +4,7 @@
         #_debug_trace_page_trace_tab_cont > div > ol > li:hover {
             background-color: #e7f4ff;
         }
+
         #_debug_trace_page_trace_open > img:hover {
             height: 35px;
         }
@@ -24,12 +25,14 @@
                         <?php
                         if (is_array($info)) {
                             foreach ($info as $k => $val) {
-                                if(stripos($k,'variable dump')!==false){
-                                    foreach($val as $idx=>$v){
-                                        echo '<li class="asdgswerqfdqwe" style="border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none"><pre style="margin: 0">' . (is_numeric($k) ? '' : $k.' : ') . trim(htmlentities(var_export($v,true), ENT_COMPAT, 'utf-8'),"\r\n\t'\"") . '</pre></li>';
+                                if (stripos($k, 'variable dump') !== false) {
+                                    foreach ($val as $idx => $v) {
+                                        $v = is_scalar($v) ? $v : (is_resource($v) ? 'resource' : var_export($v, true));
+                                        echo '<li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none">' . (is_numeric($k) ? '' : $k . ' : ') . trim(htmlentities($v, ENT_COMPAT, 'utf-8'), "\r\n\t'\"") . '</li>';
                                     }
-                                }else{
-                                    echo '<li class="asdgswerqfdqwe" style="border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none">' . (is_numeric($k) ? '' : $k.' : ') . trim(htmlentities(var_export($val,true), ENT_COMPAT, 'utf-8'),"\r\n\t'\"") . '</pre></li>';
+                                } else {
+                                    $v = is_scalar($val) ? $val : (is_resource($val) ? 'resource' : var_export($val, true));
+                                    echo '<li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none">' . (is_numeric($k) ? '' : $k . ' : ') . trim(htmlentities($v, ENT_COMPAT, 'utf-8'), "\r\n\t'\"") . '</li>';
                                 }
                             }
                         }

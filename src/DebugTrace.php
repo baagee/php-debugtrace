@@ -59,9 +59,9 @@ final class DebugTrace
             ],
         ];
         $allLogs = TraceCollector::getLogs();
-        $data['SQL'] = $allLogs['SQL'] ?? [];
-        unset($allLogs['SQL']);
-        $data['调试信息'] = $allLogs;
+        $data['SQL'] = $allLogs[TraceCollector::TRACE_TYPE_SQL] ?? [];
+        unset($allLogs[TraceCollector::TRACE_TYPE_SQL]);
+        $data['调试信息'] = array_merge(...array_values($allLogs));
         $data['请求信息'] = TraceCollector::getRequestInfo();
         $data['Env'] = TraceCollector::getEnvInfo();
         $data['$_SERVER'] = $serverInfo;

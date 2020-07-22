@@ -13,6 +13,9 @@ namespace BaAGee\DebugTrace;
  */
 class TraceCollector
 {
+    const TRACE_TYPE_SQL   = 'SQL';
+    const TRACE_TYPE_DUMP  = 'DUMP';
+    const TRACE_TYPE_TRACE = 'TRACE';
     /**
      * @var array
      */
@@ -58,12 +61,14 @@ class TraceCollector
      */
     public static function dump(...$variables)
     {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-        $trace = end($trace);
+        if (empty($variables)) {
+            return;
+        }
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
         $pos = $trace['file'] . ':' . $trace['line'];
         foreach ($variables as $variable) {
             $variable = is_scalar($variable) ? $variable : (is_resource($variable) ? 'resource' : var_export($variable, true));
-            self::addLog($pos . ' variable dump', $variable);
+            self::addLog(self::TRACE_TYPE_DUMP, $pos . ' dump ' . $variable);
         }
     }
 

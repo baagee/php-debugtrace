@@ -31,17 +31,29 @@ function test()
 {
     \BaAGee\DebugTrace\TraceCollector::addLog('SQL', 'select * from `students`');
     addTrace('卧槽怎么啦');
+    \BaAGee\DebugTrace\TraceCollector::dump(235);
     addTrace(str_repeat('嘿嘿嘿', 50));
     \BaAGee\DebugTrace\TraceCollector::addLog('SQL', 'select * from `scheduling`');
 }
-
+$a=[
+    'people'=>[
+        'name'=>"dsfsa",
+        'age'=>90,
+        'home'=>[
+            'province'=>'asd'
+        ]
+    ]
+];
 test();
+\BaAGee\DebugTrace\TraceCollector::addLog('what?', $a);
 
 addTrace('哈哈哈');
 \BaAGee\DebugTrace\TraceCollector::addLog('what?', 'select * from `scheduling`');
 \BaAGee\DebugTrace\TraceCollector::setEnv([
     'name'=>'fdasa','age'=>2342
 ]);
+
+dump($a);
 $output = \BaAGee\DebugTrace\DebugTrace::output();
 
 echo $output . $html . '</html>';

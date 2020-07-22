@@ -9,16 +9,23 @@
 if (!function_exists('\\dump')) {
     function dump(...$variables)
     {
-        \BaAGee\DebugTrace\TraceCollector::dump(...$variables);
+        if (empty($variables)) {
+            return;
+        }
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
+        $pos = $trace['file'] . ':' . $trace['line'];
+        foreach ($variables as $variable) {
+            $variable = is_scalar($variable) ? $variable : (is_resource($variable) ? 'resource' : var_export($variable, true));
+            \BaAGee\DebugTrace\TraceCollector::addLog(\BaAGee\DebugTrace\TraceCollector::TRACE_TYPE_DUMP, $pos . ' dump ' . $variable);
+        }
     }
 }
 
 if (!function_exists('\\addTrace')) {
-    function addTrace($msg)
+    function addTrace(string $msg)
     {
-        $type = 'Trace';
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
         $msg = $trace['file'] . ':' . $trace['line'] . ' ' . $msg;
-        \BaAGee\DebugTrace\TraceCollector::addLog($type, $msg);
+        \BaAGee\DebugTrace\TraceCollector::addLog(\BaAGee\DebugTrace\TraceCollector::TRACE_TYPE_TRACE, $msg);
     }
 }
