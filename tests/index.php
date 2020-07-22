@@ -8,6 +8,7 @@
 include __DIR__ . '/../vendor/autoload.php';
 
 \BaAGee\DebugTrace\DebugTrace::init('console');
+// \BaAGee\DebugTrace\DebugTrace::init('html');
 
 $html = <<<HTML
 <html>
@@ -15,18 +16,7 @@ $html = <<<HTML
 <title>test</title>
 </header>
 <body>
-
-<h1>春晓</h1>
-
-<p>
-    春眠不觉晓，
-      处处闻啼鸟。
-        夜来风雨声，
-          花落知多少。
-</p>
-
-<p>注意，浏览器忽略了源代码中的排版（省略了多余的空格和换行）。</p>
-
+aaa
 </body>
 HTML;
 
@@ -41,11 +31,17 @@ function test()
 {
     \BaAGee\DebugTrace\TraceCollector::addLog('SQL', 'select * from `students`');
     addTrace('卧槽怎么啦');
-    addTrace('嘿嘿嘿');
+    addTrace(str_repeat('嘿嘿嘿', 50));
     \BaAGee\DebugTrace\TraceCollector::addLog('SQL', 'select * from `scheduling`');
 }
 
 test();
+
+addTrace('哈哈哈');
+\BaAGee\DebugTrace\TraceCollector::addLog('what?', 'select * from `scheduling`');
+\BaAGee\DebugTrace\TraceCollector::setEnv([
+    'name'=>'fdasa','age'=>2342
+]);
 $output = \BaAGee\DebugTrace\DebugTrace::output();
 
 echo $output . $html . '</html>';

@@ -19,7 +19,8 @@ class OutputConsole implements OutputInterface
      */
     public function output($data)
     {
-        $consoleList = "console.group('{$_SERVER['REQUEST_URI']}');" . PHP_EOL;
+        $path = $_SERVER['PATH_INFO'] ?? '/';
+        $consoleList = "console.group('{$path}');" . PHP_EOL;
         foreach ($data as $title => $lines) {
             $consoleList .= $this->console($title, $lines) . PHP_EOL;
         }

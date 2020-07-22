@@ -17,6 +17,7 @@ class TraceCollector
      * @var array
      */
     protected static $logs = [];
+    protected static $env  = [];
     /**
      * @var int 毫秒
      */
@@ -190,7 +191,23 @@ class TraceCollector
 
     public static function getUploadFilesInfo()
     {
+        $_FILES = [
+            "dsgs" => [
+                "asdf" => 'asdfa',
+                "fgsd" => 'sdg'
+            ]
+        ];
         return $_FILES;
+    }
+
+    public static function setEnv($envArr)
+    {
+        self::$env = array_merge(self::$env, $envArr);
+    }
+
+    public static function getEnvInfo()
+    {
+        return array_merge($_ENV, self::$env);
     }
 
     /**
@@ -198,6 +215,12 @@ class TraceCollector
      */
     public static function getRequestInfo()
     {
-        return $_REQUEST;
+        return [
+            'get' => $_GET,
+            'post' => $_POST,
+            'files' => $_FILES,
+            'cookie' => $_COOKIE,
+            'session' => $_SESSION ?? array()
+        ];
     }
 }

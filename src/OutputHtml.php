@@ -14,12 +14,15 @@ namespace BaAGee\DebugTrace;
 class OutputHtml implements OutputInterface
 {
     /**
-     * @param $data
+     * @param $trace
      * @return string
      */
-    public function output($data)
+    public function output($trace)
     {
-        return '';
+        $runtime = $trace['runtime'];
+        unset($trace['runtime']);
+        ob_start();
+        include __DIR__ . '/tpl/DebugTraceTemplate.php';
+        return ob_get_clean();
     }
-
 }

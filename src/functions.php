@@ -14,11 +14,9 @@ if (!function_exists('\\dump')) {
 }
 
 if (!function_exists('\\addTrace')) {
-    function addTrace($msg, $type = '')
+    function addTrace($msg)
     {
-        if (empty($type)) {
-            $type = 'Trace';
-        }
+        $type = 'Trace';
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
         $msg = $trace['file'] . ':' . $trace['line'] . ' ' . $msg;
         \BaAGee\DebugTrace\TraceCollector::addLog($type, $msg);
