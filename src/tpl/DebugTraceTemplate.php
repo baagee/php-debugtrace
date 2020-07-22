@@ -8,6 +8,15 @@
         #_debug_trace_page_trace_open > img:hover {
             height: 35px;
         }
+
+        #_debug_trace_page_trace_tab_tit {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
     </style>
     <div id="_debug_trace_page_trace_tab" style="display: none;background:white;margin:0;height: 285px;">
         <div id="_debug_trace_page_trace_tab_tit"
@@ -99,4 +108,31 @@
         parseInt(g[0]) && c.click();
         b[g[1]].click()
     })();
+    window.onload = function () {
+        var oPanel = document.getElementById('_debug_trace_page_trace_tab');
+        var oDivList = document.getElementById('_debug_trace_page_trace_tab_cont');
+        var oDragIcon = document.getElementById('_debug_trace_page_trace_tab_tit');
+        var disY = 0;
+        var disH = 0;
+        oDragIcon.onmousedown = function (ev) {
+            var ev = ev || window.event;
+            disY = ev.clientY;
+            disH = oPanel.offsetHeight;
+            document.onmousemove = function (ev) {
+                var ev = ev || window.event;
+                //拖拽时为了对宽和高 限制一下范围
+                var H = disY - ev.clientY + disH;
+                if (H > document.body.clientHeight) {
+                    return
+                }
+                H = H < 31 ? 31 : H;
+                oPanel.style.height = H + 'px';
+                oDivList.style.height = (H - 35) + 'px';
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+    }
 </script>
