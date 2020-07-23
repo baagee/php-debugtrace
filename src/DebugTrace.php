@@ -52,11 +52,11 @@ final class DebugTrace
         $runtime = TraceCollector::getCostTime();
         $reqs = $runtime > 0 ? number_format(1 / ($runtime / 1000), 2) : '∞';
         $data = [
-            '基本信息' => [
+            '基本信息' => array_merge([
                 '请求信息' => date('Y-m-d H:i:s', $serverInfo['REQUEST_TIME']) . ' ' . $serverInfo['REQUEST_METHOD'] . ' ' . ($serverInfo['PATH_INFO'] ?? '/'),
                 '运行时间' => $runtime . 'ms' . ' [吞吐率：' . $reqs . 'req/s]',
                 '内存占用' => TraceCollector::getMemoryUsage() . 'kb',
-            ],
+            ],(array)$serverInfo),
         ];
         $allLogs = TraceCollector::getLogs();
         $data['SQL'] = $allLogs[TraceCollector::TRACE_TYPE_SQL] ?? [];
@@ -64,10 +64,9 @@ final class DebugTrace
         //除了SQL和LOG其他的都按照追踪调试信息归类
         unset($allLogs[TraceCollector::TRACE_TYPE_SQL], $allLogs[TraceCollector::TRACE_TYPE_LOG]);
         $data['调试信息'] = array_merge(...array_values($allLogs));
-        $data['LOG'] = $logs;
-        $data['请求信息'] = TraceCollector::getRequestInfo();
+        $data['日志信息'] = $logs;
+        $data['请求参数'] = TraceCollector::getRequestInfo();
         $data['Env'] = TraceCollector::getEnvInfo();
-        $data['$_SERVER'] = $serverInfo;
         $files = TraceCollector::getIncludedFiles();
         $data['加载文件'] = $files;
         return (new self::$outputClass())->output($data);
