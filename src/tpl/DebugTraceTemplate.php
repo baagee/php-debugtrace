@@ -1,22 +1,7 @@
 <div id="_debug_trace_page_trace"
      style='position: fixed;bottom:0;right:0;font-size:14px;width:100%;z-index: 2147483646;color: #000;text-align:left;font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;'>
     <style>
-        #_debug_trace_page_trace_tab_cont > div > ol > li:hover {
-            background-color: #e7f4ff;
-        }
-
-        #_debug_trace_page_trace_open > img:hover {
-            height: 35px;
-        }
-
-        #_debug_trace_page_trace_tab_tit {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+        #_debug_trace_page_trace_tab_cont>div>ol>li:hover{background-color:#e7f4ff}#_debug_trace_page_trace_open>img:hover{height:35px}#_debug_trace_page_trace_tab_tit{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
     </style>
     <div id="_debug_trace_page_trace_tab" style="display: none;background:white;margin:0;height: 285px;">
         <div id="_debug_trace_page_trace_tab_tit"
@@ -67,86 +52,5 @@
 </div>
 
 <script type="text/javascript">
-    (function () {
-        var b = document.getElementById("_debug_trace_page_trace_tab_tit").getElementsByTagName("span");
-        var a = document.getElementById("_debug_trace_page_trace_tab_cont").getElementsByTagName("div");
-        var c = document.getElementById("_debug_trace_page_trace_open");
-        var h = document.getElementById("_debug_trace_page_trace_close").children[0];
-        var f = document.getElementById("_debug_trace_page_trace_tab");
-        var e = document.cookie.match(/_debug_trace_show_page_trace=(\d\|\d)/);
-        var g = (e && typeof e[1] != "undefined" && e[1].split("|")) || [0, 0];
-        c.onclick = function () {
-            f.style.display = "block";
-            this.style.display = "none";
-            h.parentNode.style.display = "block";
-            g[0] = 1;
-            document.cookie = "_debug_trace_show_page_trace=" + g.join("|")
-        };
-        h.onclick = function () {
-            f.style.display = "none";
-            this.parentNode.style.display = "none";
-            c.style.display = "block";
-            g[0] = 0;
-            document.cookie = "_debug_trace_show_page_trace=" + g.join("|")
-        };
-        for (var d = 0; d < b.length; d++) {
-            b[d].onclick = (function (j) {
-                return function () {
-                    for (var i = 0; i < a.length; i++) {
-                        a[i].style.display = "none";
-                        b[i].style.color = "#999";
-                        b[i].style.backgroundColor = "#ddecf9";
-                    }
-                    a[j].style.display = "block";
-                    b[j].style.color = "#000";
-                    b[j].style.backgroundColor = "white";
-                    g[1] = j;
-                    document.cookie = "_debug_trace_show_page_trace=" + g.join("|")
-                }
-            })(d)
-        }
-        parseInt(g[0]) && c.click();
-        b[g[1]].click()
-
-        var oPanel = document.getElementById('_debug_trace_page_trace_tab');
-        var oDivList = document.getElementById('_debug_trace_page_trace_tab_cont');
-        var oDragIcon = document.getElementById('_debug_trace_page_trace_tab_tit');
-        var disY = 0;
-        var disH = 0;
-        oDragIcon.onmousedown = function (ev) {
-            var ev = ev || window.event;
-            disY = ev.clientY;
-            disH = oPanel.offsetHeight;
-            document.onmousemove = function (ev) {
-                var ev = ev || window.event;
-                //拖拽时为了对宽和高 限制一下范围
-                var H = disY - ev.clientY + disH;
-                var view = __get_view_size__()
-                if (H > view.height) {
-                    return
-                }
-                H = H < 31 ? 31 : H;
-                oPanel.style.height = H + 'px';
-                oDivList.style.height = (H - 35) + 'px';
-            }
-            document.onmouseup = function () {
-                document.onmousemove = null;
-                document.onmouseup = null;
-            }
-        }
-    })();
-
-    function __get_view_size__() {
-        if (document.compatMode == "BackCompat") {   //浏览器嗅探，混杂模式
-            return {
-                width: document.body.clientWidth,
-                height: document.body.clientHeight
-            };
-        } else {
-            return {
-                width: document.documentElement.clientWidth,
-                height: document.documentElement.clientHeight
-            };
-        }
-    }
+    (function(){var q=document.getElementById("_debug_trace_page_trace_tab_tit").getElementsByTagName("span");var r=document.getElementById("_debug_trace_page_trace_tab_cont").getElementsByTagName("div");var u=document.getElementById("_debug_trace_page_trace_tab");var s=document.getElementById("_debug_trace_page_trace_tab_cont");var n=document.getElementById("_debug_trace_page_trace_tab_tit");var p=document.getElementById("_debug_trace_page_trace_open");var i=document.getElementById("_debug_trace_page_trace_close").children[0];var k=document.getElementById("_debug_trace_page_trace_tab");var m=document.cookie.match(/_debug_trace_show_page_trace=(\d\|\d+\|\d+)/);var j=(m&&typeof m[1]!="undefined"&&m[1].split("|"))||[0,0,285];u.style.height=j[2]+"px";s.style.height=(j[2]-35)+"px";p.onclick=function(){k.style.display="block";this.style.display="none";i.parentNode.style.display="block";j[0]=1;document.cookie="_debug_trace_show_page_trace="+j.join("|")};i.onclick=function(){k.style.display="none";this.parentNode.style.display="none";p.style.display="block";j[0]=0;document.cookie="_debug_trace_show_page_trace="+j.join("|")};for(var o=0;o<q.length;o++){q[o].onclick=(function(a){return function(){for(var b=0;b<r.length;b++){r[b].style.display="none";q[b].style.color="#999";q[b].style.backgroundColor="#ddecf9"}r[a].style.display="block";q[a].style.color="#000";q[a].style.backgroundColor="white";j[1]=a;document.cookie="_debug_trace_show_page_trace="+j.join("|")}})(o)}parseInt(j[0])&&p.click();q[j[1]].click();var t=0;var l=0;n.onmousedown=function(a){var a=a||window.event;t=a.clientY;l=u.offsetHeight;document.onmousemove=function(d){var d=d||window.event;var c=t-d.clientY+l;var b=__get_view_size__();if(c>b.height){return}c=c<31?31:c;u.style.height=c+"px";s.style.height=(c-35)+"px";j[2]=c;document.cookie="_debug_trace_show_page_trace="+j.join("|")};document.onmouseup=function(){document.onmousemove=null;document.onmouseup=null}}})();function __get_view_size__(){if(document.compatMode=="BackCompat"){return{width:document.body.clientWidth,height:document.body.clientHeight}}else{return{width:document.documentElement.clientWidth,height:document.documentElement.clientHeight}}};
 </script>
