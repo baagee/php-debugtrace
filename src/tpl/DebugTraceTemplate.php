@@ -122,9 +122,7 @@
                 var ev = ev || window.event;
                 //拖拽时为了对宽和高 限制一下范围
                 var H = disY - ev.clientY + disH;
-                // console.log(document.body.clientHeight)
-                // TODO 真实高度
-                if (H > document.body.clientHeight) {
+                if (H > document.documentElement.clientHeight) {
                     return
                 }
                 H = H < 31 ? 31 : H;
