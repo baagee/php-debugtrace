@@ -107,8 +107,7 @@
         }
         parseInt(g[0]) && c.click();
         b[g[1]].click()
-    })();
-    (function () {
+
         var oPanel = document.getElementById('_debug_trace_page_trace_tab');
         var oDivList = document.getElementById('_debug_trace_page_trace_tab_cont');
         var oDragIcon = document.getElementById('_debug_trace_page_trace_tab_tit');
@@ -122,7 +121,8 @@
                 var ev = ev || window.event;
                 //拖拽时为了对宽和高 限制一下范围
                 var H = disY - ev.clientY + disH;
-                if (H > document.documentElement.clientHeight) {
+                var view = __get_view_size__()
+                if (H > view.height) {
                     return
                 }
                 H = H < 31 ? 31 : H;
@@ -134,5 +134,19 @@
                 document.onmouseup = null;
             }
         }
-    })()
+    })();
+
+    function __get_view_size__() {
+        if (document.compatMode == "BackCompat") {   //浏览器嗅探，混杂模式
+            return {
+                width: document.body.clientWidth,
+                height: document.body.clientHeight
+            };
+        } else {
+            return {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            };
+        }
+    }
 </script>
