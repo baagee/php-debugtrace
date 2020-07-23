@@ -37,11 +37,11 @@
                                 if (stripos($k, 'variable dump') !== false) {
                                     foreach ($val as $idx => $v) {
                                         $v = is_scalar($v) ? $v : (is_resource($v) ? 'resource' : var_export($v, true));
-                                        echo '<li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none">' . (is_numeric($k) ? '' : $k . ' : ') . trim(htmlentities($v, ENT_COMPAT, 'utf-8'), "\r\n\t'\"") . '</li>';
+                                        echo '<li style="word-break:break-all;border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none">' . (is_numeric($k) ? '' : $k . ' : ') . trim(htmlentities($v, ENT_COMPAT, 'utf-8'), "\r\n\t'\"") . '</li>';
                                     }
                                 } else {
                                     $v = is_scalar($val) ? $val : (is_resource($val) ? 'resource' : var_export($val, true));
-                                    echo '<li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none">' . (is_numeric($k) ? '' : $k . ' : ') . trim(htmlentities($v, ENT_COMPAT, 'utf-8'), "\r\n\t'\"") . '</li>';
+                                    echo '<li style="word-break:break-all;border-bottom:1px solid #EEE;font-size:14px;padding:0 10px;list-style: none">' . (is_numeric($k) ? '' : $k . ' : ') . trim(htmlentities($v, ENT_COMPAT, 'utf-8'), "\r\n\t'\"") . '</li>';
                                 }
                             }
                         }
@@ -108,7 +108,7 @@
         parseInt(g[0]) && c.click();
         b[g[1]].click()
     })();
-    window.onload = function () {
+    (function () {
         var oPanel = document.getElementById('_debug_trace_page_trace_tab');
         var oDivList = document.getElementById('_debug_trace_page_trace_tab_cont');
         var oDragIcon = document.getElementById('_debug_trace_page_trace_tab_tit');
@@ -122,6 +122,8 @@
                 var ev = ev || window.event;
                 //拖拽时为了对宽和高 限制一下范围
                 var H = disY - ev.clientY + disH;
+                // console.log(document.body.clientHeight)
+                // TODO 真实高度
                 if (H > document.body.clientHeight) {
                     return
                 }
@@ -134,5 +136,5 @@
                 document.onmouseup = null;
             }
         }
-    }
+    })()
 </script>

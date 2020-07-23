@@ -13,9 +13,10 @@ namespace BaAGee\DebugTrace;
  */
 class TraceCollector
 {
-    const TRACE_TYPE_SQL   = 'SQL';
-    const TRACE_TYPE_DUMP  = 'DUMP';
-    const TRACE_TYPE_TRACE = 'TRACE';
+    const TRACE_TYPE_SQL   = 'SQL';//SQL信息
+    const TRACE_TYPE_DUMP  = 'DUMP';//变量输出
+    const TRACE_TYPE_TRACE = 'TRACE';//追踪调试信息
+    const TRACE_TYPE_LOG   = 'LOG';//日志信息
     /**
      * @var array
      */
