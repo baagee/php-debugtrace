@@ -59,3 +59,7 @@ $output = \BaAGee\DebugTrace\DebugTrace::output();
 
 echo $output . $html . '</html>';
 ```
+
+![aIh64x.png](https://s1.ax1x.com/2020/08/08/aIh64x.png)
+
+![aI4JqH.md.png](https://s1.ax1x.com/2020/08/08/aI4JqH.md.png)
